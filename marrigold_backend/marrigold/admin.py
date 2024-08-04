@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Menu, Order
+from .models import Menu, Order, OrderItem
 
 # Register your models here.
 
@@ -7,6 +7,10 @@ class MenuAdmin(admin.ModelAdmin):
     list_display = ('name', 'price', 'category')
     search_fields = ('name', 'category')
     list_filter = ('category', 'price')
+
+class OrderItemAdmin(admin.ModelAdmin):
+    list_display = ('order', 'menu', 'quantity')
+    list_filter = ('order', 'menu')
 
 class OrderAdmin(admin.ModelAdmin):
     list_display = ('id', 'customer_name', 'get_items_display', 'total_price', 'created_at', 'status')
@@ -16,3 +20,4 @@ class OrderAdmin(admin.ModelAdmin):
 
 admin.site.register(Menu, MenuAdmin)
 admin.site.register(Order, OrderAdmin)
+admin.site.register(OrderItem, OrderItemAdmin)

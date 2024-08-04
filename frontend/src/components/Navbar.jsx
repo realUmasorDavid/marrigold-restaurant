@@ -34,10 +34,13 @@ export default function Navbar() {
     );
 
     const orderData = {
-      items: cartItems.map(item => item.id),
+      customer_name: 'kofo', // Set default value for customer_name
+      items: cartItems.map(item => ({
+        id: item.id,
+        quantity: item.quantity,
+      })),
       total_price: totalPrice,
       status: null,
-      customer_name: 'kofo', // Set default value for customer_name
     };
 
     try {

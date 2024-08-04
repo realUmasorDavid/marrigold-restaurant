@@ -3,7 +3,7 @@ import { useCart } from './CartContext';
 
 // Get Menu Items from backend API
 async function fetchMenuItems() {
-  const response = await fetch('http://13.60.57.106:8000/api/menus');
+  const response = await fetch('http://127.0.0.1:8000/api/menus/');
   if (!response.ok) {
     throw new Error('Network response was not ok');
   }

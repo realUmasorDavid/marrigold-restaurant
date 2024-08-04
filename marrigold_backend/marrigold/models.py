@@ -14,9 +14,14 @@ class Menu(models.Model):
     def __str__(self):
         return self.name
 
+class OrderItem(models.Model):
+    order = models.ForeignKey('Order', on_delete=models.CASCADE)
+    menu = models.ForeignKey(Menu, on_delete=models.CASCADE)
+    quantity = models.PositiveIntegerField(default=1)
+
 class Order(models.Model):
     customer_name = models.CharField(max_length=100, default='Unknown')
-    items = models.ManyToManyField(Menu)
+    items = models.ManyToManyField(Menu, through=OrderItem)
     total_price = models.DecimalField(max_digits=8, decimal_places=2)
     created_at = models.DateTimeField(auto_now_add=True)
     status = models.BooleanField(null=True, blank=True, default=None, help_text="True if accepted, False otherwise")
