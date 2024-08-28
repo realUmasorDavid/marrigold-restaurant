@@ -6,6 +6,7 @@ import '../App.css'
 
 // Send Order Items to Backend API
 async function sendOrder(orderData) {
+  console.log(orderData)
   const response = await fetch('http://127.0.0.1:8000/api/orders/', {
     method: 'POST',
     headers: {
@@ -32,17 +33,15 @@ export default function Navbar() {
       (total, item) => total + parseFloat(item.price) * item.quantity,
       0
     );
-
+  
     const orderData = {
-      customer_name: 'kofo', // Set default value for customer_name
-      items: cartItems.map(item => ({
-        id: item.id,
-        quantity: item.quantity,
-      })),
+      items: cartItems.map(item => ({ items: item.id, quantity: item.quantity, menu: item.id,
+        })),
       total_price: totalPrice,
       status: null,
+      customer_name: 'kofo', // Set default value for customer_name
     };
-
+  
     try {
       console.log(orderData)
       const data = await sendOrder(orderData);
@@ -55,6 +54,7 @@ export default function Navbar() {
       alert('Failed to place order. Please try again.');
     }
   };
+  
 
   const handleRemoveFromCart = (itemId) => {
     removeFromCart(itemId);
@@ -141,7 +141,7 @@ export default function Navbar() {
             ))}
           </div>
           <div className="flex justify-between mt-4">
-            <button onClick={handleCheckout} className="bg-primary text-white px-4 py-2 rounded-md hover:bg-blue-600">
+            <button onClick={handleCheckout} className="bg-primary text-white px-4 py-2 rounded-md">
               Checkout
             </button>
             <button onClick={() => setIsCartOpen(false)} className="text-black hover:text-gray-600">

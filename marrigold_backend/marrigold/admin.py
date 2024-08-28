@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Menu, Order, OrderItem
+from .models import Order, CartItem, Menu
 
 # Register your models here.
 
@@ -8,16 +8,16 @@ class MenuAdmin(admin.ModelAdmin):
     search_fields = ('name', 'category')
     list_filter = ('category', 'price')
 
-class OrderItemAdmin(admin.ModelAdmin):
-    list_display = ('order', 'menu', 'quantity')
-    list_filter = ('order', 'menu')
+class CartItemInline(admin.TabularInline):
+    model = CartItem
+    extra = 1
 
 class OrderAdmin(admin.ModelAdmin):
     list_display = ('id', 'customer_name', 'get_items_display', 'total_price', 'created_at', 'status')
-    search_fields = ('id',)
+    search_fields = ('id', 'customer_name')
     list_filter = ('created_at', 'status')
-    readonly_fields = ('items', 'total_price', 'created_at')
+    inlines = [CartItemInline]
 
-admin.site.register(Menu, MenuAdmin)
 admin.site.register(Order, OrderAdmin)
-admin.site.register(OrderItem, OrderItemAdmin)
+admin.site.register(CartItem)
+admin.site.register(Menu)

@@ -5,17 +5,31 @@ import './index.css'
 import StorePage from './pages/StorePage'
 import CheckoutPage from './pages/CheckoutPage'
 import ErrorPage from './pages/ErrorPage'
+import LoginPage from './pages/LoginPage.jsx'
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import SignupPage from './pages/SignupPage.jsx'
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: "/store",
     element: <StorePage />,
     errorElement: <ErrorPage />,
   },
   {
     path: "/checkout",
     element: <CheckoutPage />,
+  },
+  {
+    path: "/",
+    element: <LoginPage />,
+  },
+  {
+    path: "/login",
+    element: <LoginPage />,
+  },
+  {
+    path: "/signup",
+    element: <SignupPage />,
   },
 ]);
 

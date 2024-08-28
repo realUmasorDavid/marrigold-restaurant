@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react';
 import { useCart } from './CartContext';
+import defaultImage from '../assets/feat4.webp'  // Add a default image
 
 // Get Menu Items from backend API
 async function fetchMenuItems() {
-  const response = await fetch('http://127.0.0.1:8000/api/menus/');
+  const response = await fetch('http://127.0.0.1:8000/api/menus');
   if (!response.ok) {
     throw new Error('Network response was not ok');
   }
