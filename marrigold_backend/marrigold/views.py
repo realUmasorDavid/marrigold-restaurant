@@ -6,6 +6,17 @@ from .serializers import MenuSerializer, OrderSerializer, CartItemSerializer
 from django.contrib.auth import authenticate
 from rest_framework.authtoken.models import Token
 from rest_framework.decorators import action
+from django.http import HttpResponse
+from .utils import lock_file
+
+def my_view(request):
+    with open('example.txt', 'w') as f:
+        lock_file(f)
+        # Perform file operations
+        f.write('Some data')
+    return HttpResponse('File operation completed')
+
+
 
 # Create your views here.
 
